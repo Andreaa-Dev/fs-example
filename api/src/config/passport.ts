@@ -5,7 +5,6 @@ import UserServices from "../services/user";
 
 dotenv.config();
 const JWT_SECRET = process.env.JWT_SECRET as string;
-const CLIENT_ID = process.env.CLIENT_ID as string;
 
 export const jwtStrategy = new JwtStrategy(
   {

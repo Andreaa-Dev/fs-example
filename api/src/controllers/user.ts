@@ -66,35 +66,3 @@ export const updateUserById = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
-
-// request- response
-export const googleAuthenticate = async (
-  request: Request,
-  response: Response
-) => {
-  try {
-    // access the data from passport:done(null, user);
-    console.log(request, "request");
-
-    const userData = request.user as UserDocument;
-
-    if (!userData) {
-      response.json({ message: "Cant find user with the email" });
-      return;
-    }
-    const token = jwt.sign(
-      {
-        lastName: userData.lastName,
-        email: request.body.email,
-        firstName: userData.firstName,
-      },
-      JWT_SECRET,
-      {
-        expiresIn: "1h",
-      }
-    );
-    response.json({ token, userData });
-  } catch (error) {
-    console.log(error);
-  }
-};

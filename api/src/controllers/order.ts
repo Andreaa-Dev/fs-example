@@ -2,16 +2,6 @@ import { Request, Response } from "express";
 import Order from "../model/Order";
 import OrderService from "../services/order";
 
-export const getOrderList = async (request: Request, response: Response) => {
-  try {
-    const orderList = await OrderService.getAllOrders();
-    response.json(orderList);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-// should I use populate here
 export const createOrder = async (request: Request, response: Response) => {
   try {
     const newOrder = new Order({
