@@ -15,8 +15,11 @@ export type User = {
   password: string;
 };
 
-export type Order = {
-  createdAt: number;
+export type Cart = {
   productList: ProductOrder[];
+};
+
+export type Order = Cart & {
+  createdAt: number;
   userId: string;
 };
