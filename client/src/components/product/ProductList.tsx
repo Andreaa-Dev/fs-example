@@ -14,6 +14,16 @@ export default function ProductList() {
     dispatch(fetchProductData());
   }, [dispatch]);
 
-  console.log(productList, "productList");
-  return <div>ProductList</div>;
+  return (
+    <div>
+      ProductList
+      {productList.map((item) => (
+        <div>
+          <p>name: {item.name}</p>
+          <p> price: {item.price}</p>
+          <button> Add to cart</button>
+        </div>
+      ))}
+    </div>
+  );
 }

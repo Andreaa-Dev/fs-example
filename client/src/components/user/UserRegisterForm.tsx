@@ -1,12 +1,11 @@
 import React from "react";
 import * as Yup from "yup";
+import axios from "axios";
 import { Formik, Form } from "formik";
 import { TextField, Button } from "@mui/material";
-import axios from "axios";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { useNavigate } from "react-router-dom";
 
-export default function UserInformation() {
+export default function UserRegisterForm() {
   type InitialValue = {
     email: string;
     password: string;
@@ -15,35 +14,29 @@ export default function UserInformation() {
     email: "",
     password: "",
   };
-
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Required"),
     password: Yup.string().required("Required"),
   });
 
-  const userInformation = useSelector(
-    (state: RootState) => state.users.userInformation
-  );
-  console.log(userInformation, "user");
-
+  const navigate = useNavigate();
   return (
     <div>
-      <h1> User information</h1>
-      <p>Email:{userInformation.email}</p>
-      <p>First name: {userInformation.firstName}</p>
-      <h1>Update User Information</h1>
+      <h1>User log in</h1>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={(values) => {
-          const userToken = localStorage.getItem("userToken");
-          axios
-            .put(`http://localhost:8000/users/${userInformation._id}`, values, {
-              headers: { Authorization: `Bearer ${userToken}` },
-            })
-            .then((response) => {
-              console.log(response, "new information");
-            });
+          axios.post("http://localhost:8000/users", values).then((response) => {
+            // no need a state here (redux)
+            // only a message/alert => navigate to log in
+            if (response.status === 200) {
+              navigate("/login");
+              return;
+            } else {
+              alert("error");
+            }
+          });
         }}
       >
         {({ errors, touched, handleChange, values }) => {
@@ -66,7 +59,7 @@ export default function UserInformation() {
               {errors.password && touched.password ? (
                 <p> {errors.password}</p>
               ) : null}
-              <Button type="submit"> Update</Button>
+              <Button type="submit">Register</Button>
             </Form>
           );
         }}
