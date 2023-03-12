@@ -36,16 +36,11 @@ export default function UserInformation() {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={(values) => {
-          // send user email and password to server
-          // methods: post, endpoint: http://localhost:8000/users/login
-          // get user token
           const userToken = localStorage.getItem("userToken");
           axios
             .put(
               "http://localhost:8000/users/63ef35c33c6651bd0981e496",
               values,
-              // send token to server - by headers
-              // Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuZHJlYUBnbWFpbC5jb20iLCJfaWQiOiI2M2VmMzVjMzNjNjY1MWJkMDk4MWU0OTYiLCJmaXJzdE5hbWUiOiJhbmRyZWEiLCJpYXQiOjE2NzY5NzA1ODMsImV4cCI6MTY3Njk3NDE4M30.ylw1KlMw9XWmvAEVg4cNpHl2Z9oSKVPGlTtvmBvGfU0"
               { headers: { Authorization: `Bearer ${userToken}` } }
             )
             .then((response) => {

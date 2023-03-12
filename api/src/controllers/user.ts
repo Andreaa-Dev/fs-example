@@ -8,12 +8,12 @@ import UserService from "../services/user";
 
 export const createUser = async (request: Request, response: Response) => {
   try {
-    const { firstName, lastName, password } = request.body;
+    const { firstName, email, password } = request.body;
     const saltRounds = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     const newUser = new User({
       firstName: firstName,
-      lastName: lastName,
+      email: email,
       password: hashedPassword,
     });
     const product = await UserService.createUser(newUser);
@@ -32,14 +32,15 @@ export const logInWithPassWord = async (
 ) => {
   const userData = await UserService.findUserByEmail(request.body.email);
   if (!userData) {
-    response.json({ message: "Cant find user with the email" });
+    response.status(403).json({ message: "Cant find user with the email" });
     return;
   }
   const passwordDatabase = userData.password;
   const plainPassword = request.body.password;
+
   const match = await bcrypt.compare(plainPassword, passwordDatabase);
   if (!match) {
-    response.json({ message: "wrong password" });
+    response.status(403).json({ message: "wrong password" });
     return;
   }
   const token = jwt.sign(
