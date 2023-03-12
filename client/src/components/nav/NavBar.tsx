@@ -8,7 +8,11 @@ export default function NavBar() {
       <div>
         <Link to="/">home</Link>
         <br />
-        <Link to="/register">user</Link>
+        <Link to="/register">register</Link>
+        <br />
+        <Link to="/login">login</Link>
+        <br />
+        <Link to="/user">user information</Link>
         <br />
         <Link to="/cart">cart</Link>
         <br />

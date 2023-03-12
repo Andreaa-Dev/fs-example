@@ -11,7 +11,7 @@ const cartSlice = createSlice({
   name: "cartProducts",
   initialState,
   reducers: {
-    addProductToCart: (state, action) => {
+    addProductToCart: (state, action: PayloadAction<ProductOrder>) => {
       console.log(action.payload);
       console.log(state.cartProducts);
       const isIncluded = state.cartProducts.some((cartItem) => {
