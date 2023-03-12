@@ -7,7 +7,7 @@ const initialState: InitialState = {
   orderList: [
     {
       createdAt: Date.now(),
-      productList: [{ name: "", price: 0, quantity: 1 }],
+      productList: [{ _id: "", name: "", price: 0, quantity: 1 }],
       userId: "",
     },
   ],
