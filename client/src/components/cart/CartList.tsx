@@ -10,6 +10,7 @@ export default function CartList() {
   const userInformation = useSelector(
     (state: RootState) => state.users.userInformation
   );
+  // make order
   function onSubmitHandler() {
     const userToken = localStorage.getItem("userToken");
     axios

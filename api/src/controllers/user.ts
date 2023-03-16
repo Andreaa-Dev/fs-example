@@ -16,8 +16,8 @@ export const createUser = async (request: Request, response: Response) => {
       email: email,
       password: hashedPassword,
     });
-    const product = await UserService.createUser(newUser);
-    response.json(product);
+    const user = await UserService.createUser(newUser);
+    response.json(user);
   } catch (error) {
     console.log(error);
   }

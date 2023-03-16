@@ -9,13 +9,16 @@ type Item = {
 };
 export default function ProductItem({ item }: Item) {
   const dispatch = useDispatch();
+
   const productWithQuantity = {
     ...item,
     quantity: 1,
   };
+
   function addToCartHandler() {
     dispatch(cartActions.addProductToCart(productWithQuantity));
   }
+
   return (
     <div>
       <p>name: {item.name}</p>

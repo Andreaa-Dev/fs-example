@@ -22,7 +22,7 @@ export default function UserRegisterForm() {
   const navigate = useNavigate();
   return (
     <div>
-      <h1>User log in</h1>
+      <h1>User register</h1>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -31,10 +31,12 @@ export default function UserRegisterForm() {
             // no need a state here (redux)
             // only a message/alert => navigate to log in
             if (response.status === 200) {
+              // register success
               navigate("/login");
               return;
             } else {
               alert("error");
+              // Alert - MUI
             }
           });
         }}
