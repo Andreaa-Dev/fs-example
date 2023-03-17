@@ -6,4 +6,4 @@ Full-stack project demo
 
 2. frontend
 
-- user slice: no need foe user log in
+- user slice: no need for user log in
