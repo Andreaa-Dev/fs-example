@@ -13,7 +13,8 @@
     "paths": {
       "*": ["node_modules/*", "src/types/*"]
     },
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "types": ["jest", "node"]
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "**/*.spec.ts", "tests/**/*"]
 }
