@@ -7,9 +7,6 @@ jobs:
   build:
     name: Build & deploy
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./client
     steps:
       - name: Setup Node.js environment
         uses: actions/setup-node@v1
@@ -22,9 +19,11 @@ jobs:
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
+        working-directory: ./client
 
       - name: Set up cache!
         uses: actions/cache@v1
+        working-directory: ./client
         id: yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
@@ -33,13 +32,16 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies
+        working-directory: ./client
         run: yarn install --frozen-lockfile
 
       - name: Build
+        working-directory: ./client
         run: yarn build
 
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
+        working-directory: ./client
         with:
           publish-dir: "./build"
           production-branch: main
